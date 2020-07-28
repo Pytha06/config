@@ -1,0 +1,55 @@
+add form to config TAB
+-----------------------
+  "followUp":{
+                "translationKey":"Follow Up",
+                "type":"followUp",
+                "isObservation":true,
+                "displayOrder":9,
+                "dashboardConfig":{
+                        "showDetailsButton":true,
+                        "conceptNames":["Follow Up Form"],
+                        "numberOfVisits":3
+                },
+                "expandedViewConfig":{
+                        "conceptNames":["Follow Up Form"],
+                        "numberOfVisits":3,
+                        "showDetailsButton":true,
+                        "pivotTable":{
+                 }
+                }
+            },
+----------------------------------------------------------------------
+
+add more rows to a concepts
+------------------------------
+"Adverse Events Template": {
+          "allowAddMore": true
+       },
+
+HIDE EXPAIN TEST WHEN IF YOU CLICK ON YES OR NO                 NB: YES and NO must be coded not boolean FOR NO click
+-------------------------------------------------
+FOR NO
+======
+'child_attend_school': function(formName, formFieldValues){   //child_attend_school is concept name or parent for where you want to do hide
+        var conditions = {show: [], hide: []};
+        var child_attend_school = formFieldValues['child_attend_school'];
+        var nonCodedchild_attend_school = formFieldValues['child_attend_school'];
+        if(nonCodedchild_attend_school=='No') {
+            conditions.show.push("explain5")
+        } else {
+            conditions.hide.push("explain5")
+        }
+        return conditions; 
+    }
+FOR YES
+=======
+'orthodonticTreatment': function(formName, formFieldValues){
+        var conditions = {show: [], hide: []};
+        var orthodonticTreatment = formFieldValues['orthodonticTreatment'];
+        if(orthodonticTreatment) {
+            conditions.show.push("explain4")
+        } else {
+            conditions.hide.push("explain4")
+        }
+        return conditions;
+    },
